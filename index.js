@@ -124,13 +124,16 @@ async function setup(){
 
 }
 
-board.on('ready', async function() {
-  setup()
-
+async loop() {
   while(true) {
     await delay('1s');
     setreg(0x28, 0xF0); // Key on
     await delay('1s');
     setreg(0x28, 0x00); // Key off
   }
+}
+
+board.on('ready', function() {
+  setup()
+  loop()
 });
