@@ -1,0 +1,17 @@
+{
+  "name": "2612",
+  "version": "1.0.0",
+  "description": "controlling OPN2 via chip for maximum synthesis",
+  "main": "index.js",
+  "dependencies": {
+    "chip-io": "^2.1.1",
+    "johnny-five": "^0.11.3",
+    "nanotimer": "^0.3.14"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "pblca",
+  "license": "ISC"
+}
