@@ -22,7 +22,7 @@ var p = {
   d4:5,
   d5:6,
   d6:7,
-  d7:8
+  d7:8,
   a0:9,  // R/W Enable, Active High
   a1:10, // Part 1 / Part 2 ( Low=1, High=2 )
   cs:11, // Chip Select
@@ -125,6 +125,8 @@ async function setup(){
 }
 
 board.on('ready', async function() {
+  setup()
+
   while(true) {
     await delay('1s');
     setreg(0x28, 0xF0); // Key on
