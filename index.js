@@ -124,7 +124,7 @@ async function setup(){
 
 }
 
-async loop() {
+async function loop() {
   while(true) {
     await delay('1s');
     setreg(0x28, 0xF0); // Key on
