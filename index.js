@@ -21,7 +21,7 @@ var notes = {
 keypress(process.stdin)
 process.stdin.on('keypress', (ch, k)=> {
   if(k && k.name in notes){
-    process.stdout.write(`>> ${octave} ${notes[k.name]}${notes[k.name].length==2&&' '}\r`)
+    process.stdout.write(`>> ${octave} ${notes[k.name]}${notes[k.name].length==2?'':' '}\r`)
   } else if (k && k.name === 'up'){
     octave++
   } else if (k && k.name === 'down'){
