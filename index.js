@@ -20,11 +20,11 @@ var notes = {
 
 keypress(process.stdin)
 process.stdin.on('keypress', (ch, k)=> {
-  if(k.name in notes){
-    process.stdout.write(notes[k.name]+octave)
-  } else if (k.name === 'up'){
+  if(k && k.name in notes){
+    process.stdout.write('>> '+notes[k.name]+octave+'\r')
+  } else if (k && k.name === 'up'){
     octave++
-  } else if (k.name === 'down'){
+  } else if (k && k.name === 'down'){
     octave--
   }
   if(k && k.ctrl && k.name === 'c'){
