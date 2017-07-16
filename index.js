@@ -166,6 +166,7 @@ board.on('ready', function() {
   var value = 0;
   setInterval(function() {
     value = value > 0x11 ? value >> 1 : 0x88;
-    register.send(value);
+    console.log(value)
+    ex.send(value);
   }, 200);
 });
