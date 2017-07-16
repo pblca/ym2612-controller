@@ -163,10 +163,8 @@ async function loop() {
 board.on('ready', function() {
 //  setup()
 //  loop()
-  var value = 0;
+  var value = 0b10111111;
   setInterval(function() {
-    value = value >> 1
-    console.log(value)
     ex.send(value)
   }, 20);
 });
