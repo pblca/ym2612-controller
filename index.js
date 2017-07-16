@@ -43,8 +43,6 @@ var board = new j5.Board({
   repl: false
 })
 
-var ex = new j5.ShiftRegister([53, 54, 55]);
-
 //var ex = new j5.Expander("MCP23017")
 
 var p = {
@@ -163,8 +161,4 @@ async function loop() {
 board.on('ready', function() {
 //  setup()
 //  loop()
-  var value = 0b10111111;
-  setInterval(function() {
-    ex.send(value)
-  }, 20);
 });
