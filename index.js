@@ -165,8 +165,8 @@ board.on('ready', function() {
 //  loop()
   var value = 0;
   setInterval(function() {
-    value = value > 0x11 ? value >> 1 : 0x88;
+    value = value >> 1
     console.log(value)
-    ex.send(value);
-  }, 200);
+    ex.send(value)
+  }, 20);
 });
