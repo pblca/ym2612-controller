@@ -6,6 +6,7 @@
   "dependencies": {
     "chip-io": "^2.1.1",
     "johnny-five": "^0.11.3",
+    "keypress": "^0.2.1",
     "nanotimer": "^0.3.14"
   },
   "devDependencies": {},

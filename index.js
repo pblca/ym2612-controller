@@ -1,18 +1,49 @@
 var j5 = require('johnny-five')
 var chipio = require('chip-io')
-var nanotimer = require('nanotimer')
+var keypress = require('keypress')
 
-var t = new nanotimer()
+var octave=0
+var notes = {
+  s:'c',
+  e:'c#',
+  d:'d',
+  r:'d#',
+  f:'e',
+  g:'f',
+  y:'f#',
+  h:'g',
+  u:'g#',
+  j:'a',
+  i:'a#',
+  k:'b'
+}
+
+keypress(process.stdin)
+process.stdin.on('keypress', (ch, k)=> {
+  if(k.name in notes){
+    console.log(notes[k.name]+octave)
+  } else if (k.name === 'up'){
+    octave++
+  } else if (k.name === 'down'){
+    octave--
+  }
+  if(k && k.ctrl && k.name === 'c'){
+    process.exit()
+  }
+})
+process.stdin.setRawMode(true)
+process.stdin.resume()
 
 function delay(time){
-  return new Promise(resolve => t.setTimeout(resolve, '',  time));
+  return new Promise(resolve => setTimeout(resolve, time));
 }
 
 var board = new j5.Board({
-  io: new chipio()
+  io: new chipio(),
+  repl: false
 })
 
-var ex = new j5.Expander("MCP23017")
+//var ex = new j5.Expander("MCP23017")
 
 var p = {
   d0:1,  // Data Bus
@@ -43,24 +74,18 @@ function WriteOPNData(data) {
   ex.analogWrite(p.d7, data & 0x80)
 }
 
-async function setreg(address, data){
+function setreg(address, data){
   ex.digitalWrite(p.a0, 0)
-  await delay('2u')
   ex.digitalWrite(p.cs, 0)
-  writeOPNData(addr)
   ex.digitalWrite(p.wr, 0)
-  await delay('2u')
 
   ex.digitalWrite(p.wr, 1)
   ex.digitalWrite(p.cs, 1)
-  await delay('2u')
   ex.digitalWrite(p.a0, 1)
-  await delay('2u')
   ex.digitalWrite(p.cs, 0)
   writeONData(data)
 
   ex.digitalWrite(p.wr, 0)
-  await delay('2u')
   ex.digitalWrite(p.wr, 1)
   ex.digitalWrite(p.cs, 1)
 }
@@ -76,9 +101,9 @@ async function setup(){
   ex.digitalWrite(p.ic, 1)
 
   ex.digitalWrite(p.ic, 0)
-  await delay('10m')
+  await delay(10)
   ex.digitalWrite(p.cs, 1)
-  await delay('10m')
+  await delay(10)
 
   setreg(0x22, 0x00); // LFO off
   setreg(0x27, 0x00); // Note off (channel 0)
@@ -126,14 +151,14 @@ async function setup(){
 
 async function loop() {
   while(true) {
-    await delay('1s');
+    await delay(1000);
     setreg(0x28, 0xF0); // Key on
-    await delay('1s');
+    await delay(1000);
     setreg(0x28, 0x00); // Key off
   }
 }
 
 board.on('ready', function() {
-  setup()
-  loop()
+//  setup()
+//  loop()
 });
