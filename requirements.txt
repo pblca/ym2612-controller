@@ -1,0 +1,7 @@
+appdirs==1.4.3
+args==0.1.0
+astor==0.5
+CHIP-IO==0.5.9
+clint==0.5.1
+hy==0.13.0+35.gc3c7af2
+rply==0.7.5
